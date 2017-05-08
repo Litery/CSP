@@ -1,6 +1,5 @@
 import random
 import numpy
-import matplotlib.pyplot as plt
 import time
 
 
@@ -12,6 +11,7 @@ class Crate:
         self.crate = numpy.zeros((size, size), dtype="int_")
         if size % 2 is not 0:
             self.colors += 1
+        self.visits = 0
 
     def load_active1(self, x, y):
         out = (-1, self.size)
@@ -27,6 +27,7 @@ class Crate:
                 col not in adj_col and set() == {(col, adj) for adj in adj_col} & used], adj_col, adjacent
 
     def color1(self, used, active):
+        self.visits += 1
         if 0 not in self.crate:
             return True, None
         x, y = active[0]
@@ -80,12 +81,12 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 
 def test1():
-    for size in range(1, 12):
+    for size in range(3, 8):
         crt = Crate(size)
         timer = current_milli_time()
         x, y = crt.color1(set(), [(int(size / 2), int(size / 2))])
         timer = current_milli_time() - timer
-        print("size: " + str(size) + " time: " + str(timer))
+        print("size: " + str(size) + " time: " + str(timer) + " iters:" + str(crt.visits))
         print(crt.crate)
 
 
@@ -96,6 +97,4 @@ def test2():
     print(y)
 
 
-x = [1, 2, 3]
-y = x + [5]
-print(x)
+test1()
