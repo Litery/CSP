@@ -19,6 +19,8 @@ class CSP:
             return True
         result = False
         node = problem.get_next_node()
+        if node is None:
+            return result
         possible = problem.get_moves(node)
         if traverse is 1:
             possible.sort(key=lambda move: problem.rate_move(move))

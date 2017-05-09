@@ -1,5 +1,6 @@
 import time
 from CrateHC import Crate
+from Queens import Queens
 from CSP import CSP
 
 
@@ -41,6 +42,36 @@ def test3(size):
     csp = CSP(problem)
     csp.forward_checking(10, log=True)
 
+def test4(size):
+    init = (0, 0)
+    problem = Queens(size, init)
+    csp = CSP(problem)
+    csp.forward_checking(-1, True, 0)
 
-test1(2, 12, (2, 9))
-# test3(5)
+def test5(scope):
+    def current_milli_time(): return int(round(time.time() * 1000))
+    cols = ['Size', 'BT_time', 'FC_time', 'BT_iters', 'FC_iters']
+    row_format = "{:>15}" * 5
+    print(row_format.format(*cols))
+    for i in range(*scope):
+        data = []
+        init = (int(i / 2), int(i / 2))
+        data.append(i)
+        problem1 = Queens(i, init)
+        problem2 = Queens(i, init)
+        csp1 = CSP(problem1)
+        timer = current_milli_time()
+        csp1.back_tracking()
+        timer = current_milli_time() - timer
+        data.append(timer)
+        csp2 = CSP(problem2)
+        timer = current_milli_time()
+        csp2.forward_checking(-1)
+        timer = current_milli_time() - timer
+        data.append(timer)
+        data.append(csp1.visits)
+        data.append(csp2.visits)
+        print(row_format.format(*data))
+
+# test1(2, 12, (2, 9))
+test5((5, 15))

@@ -25,7 +25,7 @@ class Queens(Problem):
             print(row)
 
     def have_moves(self, depth: int) -> bool:
-        if len(self.nexts) < self.size * self.size:
+        if depth == 0 or len(self.nexts) < self.size * self.size:
             return True
         result = numpy.sum(self.crate)
         for node in self.nexts[self.index: -1]:
@@ -55,7 +55,7 @@ class Queens(Problem):
         self.index -= 1
 
     def get_next_node(self) -> Tuple[int, int]:
-        return self.nexts[self.index]
+        return self.nexts[self.index] if self.index < len(self.nexts) else None
 
     def get_next_nodes(self, length: int):
         return self.nexts[self.index: self.index + length]
