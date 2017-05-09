@@ -31,7 +31,7 @@ class Problem(ABC):
         pass
 
     @abstractmethod
-    def has_moves(self, node: Node) -> bool:
+    def have_moves(self, depth: int) -> bool:
         pass
 
     @abstractmethod

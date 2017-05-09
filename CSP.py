@@ -29,15 +29,15 @@ class CSP:
         for move in possible:
             problem.load_next_nodes(node)
             problem.move(move, node)
-            forward_check = (problem.has_moves(node) for node in problem.get_next_nodes(max_insight))
+            forward_check = problem.have_moves(max_insight)
             if log:
                 print('Node:' + str(node))
                 print('Possible:' + str(possible))
-                fcheck = [(problem.has_moves(node), node) for node in problem.get_next_nodes(max_insight)]
+                fcheck = [(problem.get_moves(node), node) for node in problem.get_next_nodes(max_insight)]
                 print('Forward check:' + str(fcheck))
                 self.problem.print()
                 input()
-            if False not in forward_check:
+            if forward_check:
                 result = self.forward_checking(max_insight, log, traverse)
             if result:
                 break

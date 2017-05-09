@@ -38,8 +38,8 @@ class Crate(Problem):
     def get_moves(self, node: Tuple[int, int]) -> List[int]:
         return [color for color in range(1, self.colors + 1) if self.check_move(color, self.adjacent_colors(node))]
 
-    def has_moves(self, node: Tuple[int, int]) -> bool:
-        return any(self.get_moves(node))
+    def have_moves(self, depth: int) -> bool:
+        return False not in [any(self.get_moves(node)) for node in self.get_next_nodes(depth)]
 
     def move(self, move: int, node: Tuple[int, int]):
         self.crate[node] = move
