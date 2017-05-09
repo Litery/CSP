@@ -33,12 +33,12 @@ class CSP:
             if log:
                 print('Node:' + str(node))
                 print('Possible:' + str(possible))
-                fcheck = ((problem.has_moves(node), node) for node in problem.get_next_nodes(max_insight))
+                fcheck = [(problem.has_moves(node), node) for node in problem.get_next_nodes(max_insight)]
                 print('Forward check:' + str(fcheck))
                 self.problem.print()
                 input()
             if False not in forward_check:
-                result = self.forward_checking(max_insight)
+                result = self.forward_checking(max_insight, log, traverse)
             if result:
                 break
             problem.back(move, node)
