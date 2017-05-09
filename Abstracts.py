@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List, Iterable, TypeVar
 
-
-
 Move = TypeVar('Move')
 Node = TypeVar('Node')
 
@@ -29,7 +27,7 @@ class Problem(ABC):
         pass
 
     @abstractmethod
-    def get_moves(self, node: Node) -> Iterable[Move]:
+    def get_moves(self, node: Node) ->List[Move]:
         pass
 
     @abstractmethod
