@@ -1,7 +1,6 @@
 import time
 from CrateHC import Crate
 from CSP import CSP
-import tabulate as tb
 
 
 def test1(traverse, insight, scope):
@@ -22,7 +21,7 @@ def test1(traverse, insight, scope):
         data.append(timer)
         csp2 = CSP(problem2)
         timer = current_milli_time()
-        csp2.forward_checking(max_insight=insight, traverse=traverse)
+        csp2.forward_checking(max_insight=i, traverse=traverse)
         timer = current_milli_time() - timer
         data.append(timer)
         data.append(csp1.visits)
@@ -30,10 +29,18 @@ def test1(traverse, insight, scope):
         print(row_format.format(*data))
 
 
-def test2():
-    problem = Crate(3)
+def test2(size):
+    init = (int(size / 2), int(size / 2))
+    problem = Crate(size)
     csp = CSP(problem)
     csp.back_tracking(log=True)
 
+def test3(size):
+    init = (int(size / 2), int(size / 2))
+    problem = Crate(size, init)
+    csp = CSP(problem)
+    csp.forward_checking(10, log=True)
 
-test1(1, 12, (2, 11))
+
+test1(2, 12, (2, 9))
+# test3(5)
