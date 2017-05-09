@@ -30,7 +30,7 @@ class Crate(Problem):
         return self.nexts[self.index]
 
     def get_next_nodes(self, length: int) -> List[Tuple[int, int]]:
-        return self.nexts[self.index:length]
+        return self.nexts[self.index: self.index + length]
 
     def load_next_nodes(self, node):
         self.nexts += [adj for adj in self.adjacent_nodes(node) if adj not in self.nexts]
